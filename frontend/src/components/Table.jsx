@@ -20,7 +20,9 @@ export default function Table({ header, rows }) {
                 {header?.map((head, k) => (
                   <td key={k} className="column">
                     <span className="td-title">{head}</span>
-                    <span className="td-item">{item[head]}</span>
+                    <span className="td-item">
+                      {item[head.toLowerCase()] || "-"}
+                    </span>
                   </td>
                 ))}
                 <td className="column">
