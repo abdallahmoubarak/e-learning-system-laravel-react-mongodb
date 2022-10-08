@@ -1,28 +1,36 @@
 import { useState } from "react";
 import Button from "../Button";
 import Input from "../Input";
-import Logo from "../Logo";
 import Select from "../Select";
 
-export default function Sign() {
+export default function Sign({ auth, setAuth }) {
   const [signup, setSignUp] = useState(true);
+
   return (
     <>
-      <div className="sign-container">
-        <h1>{signup ? "Sign Up" : "Sign In"}</h1>
-        <div className="inputs-container">
-          {signup && <Input name="Name" />}
-          <Input name="Email" />
-          <Input name="Password" pass={true} />
-          {signup && (
-            <Select name="Type" options={["Student", "Instructor", "Admin"]} />
-          )}
+      {auth && (
+        <div className="sign-container">
+          <h1>{signup ? "Sign Up" : "Sign In"}</h1>
+          <div className="inputs-container">
+            {signup && <Input name="Name" />}
+            <Input name="Email" />
+            <Input name="Password" pass={true} />
+            {signup && (
+              <Select
+                name="Type"
+                options={["Student", "Instructor", "Admin"]}
+              />
+            )}
+          </div>
+          <div className="switch" onClick={() => setSignUp(!signup)}>
+            {signup ? "I already have an account" : "I don't have an account"}
+          </div>
+          <Button
+            text={signup ? "Sign Up" : "Sign In"}
+            onClick={() => setAuth(false)}
+          />
         </div>
-        <div className="switch" onClick={() => setSignUp(!signup)}>
-          {signup ? "I already have an account" : "I don't have an account"}
-        </div>
-        <Button text={signup ? "Sign Up" : "Sign In"} />
-      </div>
+      )}
 
       <style jsx>{`
         h1 {

@@ -9,10 +9,10 @@ export default function Logo() {
       <style jsx>{`
         .logo {
           width: 7rem;
-          position: fixed;
-          bottom: 0;
           padding: 1rem;
-          left: calc(50% - 3.5rem);
+          position: absolute;
+          bottom: 0;
+          right: calc(50vw - 3.5rem);
         }
       `}</style>
     </>
