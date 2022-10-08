@@ -1,12 +1,10 @@
 import "./App.css";
-import Input from "./components/Input";
+import Sign from "./components/pages/Sign";
 
 function App() {
   return (
-    <div className="App">
-      <h1>Hello World</h1>
-
-      <Input name="Name" />
+    <div className="app">
+      <Sign />
     </div>
   );
 }
