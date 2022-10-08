@@ -9,3 +9,7 @@ Implement an e-learning system using Laravel, React and MongoDB:
 - Instructors shall be able to create announcements.
 - Students shall be able to view and submit assignments.
 - Students shall be able to view their enrolled courses.
+
+Figma design:
+
+<img src='./src/edu.png' alt='edu'>
