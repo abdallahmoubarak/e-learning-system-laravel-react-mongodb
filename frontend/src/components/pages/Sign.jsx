@@ -5,6 +5,7 @@ import Select from "../Select";
 
 export default function Sign({ auth, setAuth }) {
   const [signup, setSignUp] = useState(true);
+  const [selected, setSelected] = useState("");
 
   return (
     <>
@@ -19,6 +20,8 @@ export default function Sign({ auth, setAuth }) {
               <Select
                 name="Type"
                 options={["Student", "Instructor", "Admin"]}
+                setSelected={setSelected}
+                selected={selected}
               />
             )}
           </div>
