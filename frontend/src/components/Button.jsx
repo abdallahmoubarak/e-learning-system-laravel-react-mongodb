@@ -6,7 +6,7 @@ export default function Button({ text, onClick }) {
         button {
           background: white;
           color: #9747ff;
-          padding: 0.8rem 3.6rem;
+          padding: 0.6rem 3rem;
           border-radius: 0.4rem;
           font-size: 1.2rem;
           border: none;
