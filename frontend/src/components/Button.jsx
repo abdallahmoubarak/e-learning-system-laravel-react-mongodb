@@ -13,6 +13,7 @@ export default function Button({ text, onClick }) {
           cursor: pointer;
           font-weight: 600;
           width: fit-content;
+          border: 1px solid #9747ff;
         }
         button:hover {
           background: #eeddff;
