@@ -31,11 +31,28 @@ h1 {
   font-weight: 1000;
 }
 
-.app {
+/**************** Sign ******************/
+
+.sign {
   background: var(--primary-color);
   width: 100vw;
   height: 100vh;
   padding: 1rem 0rem;
+  transition: all 0.3s ease-in;
+  -webkit-transition: all 0.3s ease-in;
+  -moz-transition: all 0.3s ease-in;
+  -ms-transition: all 0.3s ease-in;
+  -o-transition: all 0.3s ease-in;
+}
+
+.sign-done {
+  height: 5rem;
+  padding: 0rem;
+  transition: all 0.6s ease-in;
+  -webkit-transition: all 0.6s ease-in;
+  -moz-transition: all 0.6s ease-in;
+  -ms-transition: all 0.6s ease-in;
+  -o-transition: all 0.6s ease-in;
 }
 
 /**************** Input ****************/
