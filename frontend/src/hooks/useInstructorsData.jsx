@@ -1,8 +1,8 @@
 import { useQuery, useMutation, useQueryClient } from "react-query";
-import axios from "axios";
+import { request } from "../util/axios-utils";
 
 const addInstructor = (instructor) => {
-  return axios.post("http://localhost:4000/instructors", instructor);
+  return request({ url: "/instructors", data: instructor, method: "post" });
 };
 
 export const useInstructorsData = () => {

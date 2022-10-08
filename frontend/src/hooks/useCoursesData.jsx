@@ -1,8 +1,8 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import axios from "axios";
+import { request } from "../util/axios-utils";
 
 const addCourse = (course) => {
-  return axios.post("http://localhost:4000/courses", course);
+  return request({ url: "/courses", data: course, method: "post" });
 };
 
 export const useCoursesData = () => {
