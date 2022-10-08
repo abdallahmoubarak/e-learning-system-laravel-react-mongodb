@@ -8,7 +8,7 @@ export default function Sign({ auth, setAuth }) {
 
   return (
     <>
-      {auth && (
+      {!auth && (
         <div className="sign-container">
           <h1>{signup ? "Sign Up" : "Sign In"}</h1>
           <div className="inputs-container">
@@ -27,7 +27,7 @@ export default function Sign({ auth, setAuth }) {
           </div>
           <Button
             text={signup ? "Sign Up" : "Sign In"}
-            onClick={() => setAuth(false)}
+            onClick={() => setAuth(true)}
           />
         </div>
       )}
