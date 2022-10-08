@@ -7,13 +7,13 @@ export default function Input({ name, value, pass }) {
       <div className="input-container">
         <input
           className="input"
-          autocomplete="off"
+          autoComplete="off"
           id={id}
           placeholder={name}
           value={value}
           type={pass ? "password" : "text"}
         />
-        <label For={id}>{name}</label>
+        <label htmlFor={id}>{name}</label>
       </div>
     </>
   );

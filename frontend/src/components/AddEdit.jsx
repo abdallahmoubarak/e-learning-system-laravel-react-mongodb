@@ -24,7 +24,7 @@ export default function AddEdit() {
         )}
         <Button text="Add" dark={true} />
       </div>
-      <style jsx>{`
+      <style jsx="true">{`
         .add-edit-container {
           padding: 2rem;
           display: flex;

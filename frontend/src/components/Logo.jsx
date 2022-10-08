@@ -6,7 +6,7 @@ export default function Logo() {
       <div className="logo">
         <LogoSvg />
       </div>
-      <style jsx>{`
+      <style jsx="true">{`
         .logo {
           width: 7rem;
           padding: 1rem;

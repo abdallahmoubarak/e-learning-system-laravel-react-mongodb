@@ -1,8 +1,8 @@
-export default function Button({ text, onClick, dark }) {
+export default function Button({ text = "click", onClick, dark }) {
   return (
     <>
       <button onClick={onClick}>{text}</button>
-      <style jsx>{`
+      <style jsx="true">{`
         button {
           background: ${dark ? "#9747ff" : "white"};
           color: ${dark ? "white" : "#9747ff"};

@@ -15,10 +15,10 @@ export default function Table({ header, rows }) {
             </tr>
           </thead>
           <tbody>
-            {rows?.map((item) => (
-              <tr>
-                {header?.map((head) => (
-                  <td className="column">
+            {rows?.map((item, j) => (
+              <tr key={j}>
+                {header?.map((head, k) => (
+                  <td key={k} className="column">
                     <span className="td-title">{head}</span>
                     <span className="td-item">{item[head]}</span>
                   </td>
@@ -31,7 +31,7 @@ export default function Table({ header, rows }) {
           </tbody>
         </table>
       </div>
-      <style jsx>{`
+      <style jsx="true">{`
         .table-container {
           max-width: 100%;
           border: 1px solid #9747ff;

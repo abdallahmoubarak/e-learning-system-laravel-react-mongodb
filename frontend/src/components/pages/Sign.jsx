@@ -32,7 +32,7 @@ export default function Sign({ auth, setAuth }) {
         </div>
       )}
 
-      <style jsx>{`
+      <style jsx="true">{`
         h1 {
           width: 100%;
           font-size: 2.4rem;

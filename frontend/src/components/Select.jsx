@@ -9,17 +9,13 @@ export default function Select({ name, options, selected, setSelected }) {
         <select
           className="input"
           id={id}
-          onChange={(e) => setSelected(e.target.value)}>
-          <option value="none" selected disabled hidden>
-            Select A {name}
-          </option>
-          {options.map((option) => (
-            <option value={option} selected={option === selected}>
-              {option}
-            </option>
+          onChange={(e) => setSelected(e.target.value)}
+          value={selected || `Select A ${name}`}>
+          {options.map((option, i) => (
+            <option key={i}>{option}</option>
           ))}
         </select>
-        <label For={id}>{name}</label>
+        <label htmlFor={id}>{name}</label>
       </div>
     </>
   );

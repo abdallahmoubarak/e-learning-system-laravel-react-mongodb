@@ -7,7 +7,7 @@ export default function Modal({ openModal, setOpenModal, content }) {
         </div>
         {content}
       </div>
-      <style jsx>{`
+      <style jsx="true">{`
         .modal {
           width: 100vw;
           max-width: 30rem;

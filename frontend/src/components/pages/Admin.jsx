@@ -3,9 +3,19 @@ import AddEdit from "../AddEdit";
 import Button from "../Button";
 import Table from "../Table";
 import Modal from "../Modal";
+import { useQuery } from "react-query";
+import axios from "axios";
 
 export default function Admin() {
   const [openModal, setOpenModal] = useState(false);
+
+  const { isLoading, data } = useQuery("admins", () =>
+    axios.get("http://localhost:4000/admins"),
+  );
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  console.log(data.data);
 
   return (
     <>
@@ -21,7 +31,7 @@ export default function Admin() {
           content={<AddEdit />}
         />
       </div>
-      <style jsx>{`
+      <style jsx="true">{`
         .admin-container {
           display: flex;
           flex-direction: column;
