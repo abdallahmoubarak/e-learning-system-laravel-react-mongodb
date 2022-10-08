@@ -1,17 +1,22 @@
 import { useState } from "react";
 import Button from "../Button";
 import Input from "../Input";
+import Logo from "../Logo";
+import Select from "../Select";
 
 export default function Sign() {
   const [signup, setSignUp] = useState(true);
   return (
     <>
       <div className="sign-container">
-        <h1>Sign Up</h1>
+        <h1>{signup ? "Sign Up" : "Sign In"}</h1>
         <div className="inputs-container">
-          <Input name="Name" />
+          {signup && <Input name="Name" />}
           <Input name="Email" />
           <Input name="Password" pass={true} />
+          {signup && (
+            <Select name="Type" options={["Student", "Instructor", "Admin"]} />
+          )}
         </div>
         <div className="switch" onClick={() => setSignUp(!signup)}>
           {signup ? "I already have an account" : "I don't have an account"}
@@ -31,6 +36,7 @@ export default function Sign() {
           align-items: center;
           max-width: 26rem;
           margin: auto;
+          padding: 0 1rem;
           padding-top: 3rem;
           color: white;
         }
