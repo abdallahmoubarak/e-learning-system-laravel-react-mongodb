@@ -7,8 +7,11 @@ export default function AddEdit({
   instructors,
   setOpenModal,
   handleAddInstructorClick,
+  handleAddStudentClick,
+  handleAddCourseClick,
 }) {
   const [selected, setSelected] = useState();
+  const [instructor, setInstructor] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
@@ -31,7 +34,12 @@ export default function AddEdit({
           </>
         )}
         {selected === "Course" && (
-          <Select name="Instructor" options={instructors} />
+          <Select
+            name="Instructor"
+            options={instructors}
+            selected={instructor}
+            setSelected={setInstructor}
+          />
         )}
         <Button
           text="Add"
@@ -39,6 +47,13 @@ export default function AddEdit({
           onClick={() => {
             selected === "Instructor" &&
               handleAddInstructorClick({ name, email, phone });
+            selected === "Student" &&
+              handleAddStudentClick({ name, email, phone });
+            selected === "Course" && handleAddCourseClick({ name, instructor });
+            setName("");
+            setEmail("");
+            setPhone("");
+            setInstructor("");
             setOpenModal(false);
           }}
         />

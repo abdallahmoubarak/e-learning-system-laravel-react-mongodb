@@ -8,8 +8,8 @@ import {
   useAddInstructor,
   useInstructorsData,
 } from "../../hooks/useInstructorsData";
-import { useStudentsData } from "../../hooks/useStudentsData";
-import { useCoursesData } from "../../hooks/useCoursesData";
+import { useAddStudent, useStudentsData } from "../../hooks/useStudentsData";
+import { useAddCourse, useCoursesData } from "../../hooks/useCoursesData";
 import filter from "../../util/search";
 import { v4 as uuid } from "uuid";
 let rows = [];
@@ -23,12 +23,28 @@ export default function Admin() {
   const { data: courses } = useCoursesData();
 
   const { mutate: addInstructor } = useAddInstructor();
+  const { mutate: addStudent } = useAddStudent();
+  const { mutate: addCourse } = useAddCourse();
 
   const handleAddInstructorClick = ({ name, email, phone }) => {
     const id = uuid();
     const code = "122109";
     const instructor = { id, code, name, email, phone };
     addInstructor(instructor);
+  };
+
+  const handleAddStudentClick = ({ name, email, phone }) => {
+    const id = uuid();
+    const code = "122109";
+    const student = { id, code, name, email, phone };
+    addStudent(student);
+  };
+
+  const handleAddCourseClick = ({ name, instructor }) => {
+    const id = uuid();
+    const code = "122109";
+    const course = { id, code, name, instructor };
+    addCourse(course);
   };
 
   if (selected === "" && students && instructors) {
@@ -68,6 +84,8 @@ export default function Admin() {
             <AddEdit
               instructors={instructors?.map((i) => i.name)}
               handleAddInstructorClick={handleAddInstructorClick}
+              handleAddStudentClick={handleAddStudentClick}
+              handleAddCourseClick={handleAddCourseClick}
               setOpenModal={setOpenModal}
             />
           }

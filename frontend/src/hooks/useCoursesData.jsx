@@ -1,17 +1,26 @@
-import { useQuery } from "react-query";
+import { useMutation, useQuery, useQueryClient } from "react-query";
 import axios from "axios";
 
-const fetchAllData = () => {
-  return axios.get("http://localhost:4000/courses");
+const addCourse = (course) => {
+  return axios.post("http://localhost:4000/courses", course);
 };
 
 export const useCoursesData = () => {
-  return useQuery("courses", fetchAllData, {
+  return useQuery("courses", {
     select: (data) => {
-      const courses = data.data.map((instructor) => {
-        return { ...instructor, type: "Course" };
+      const courses = data?.map((course) => {
+        return { ...course, type: "Course" };
       });
       return courses;
+    },
+  });
+};
+
+export const useAddCourse = () => {
+  const queryClient = useQueryClient();
+  return useMutation(addCourse, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["courses"]);
     },
   });
 };
