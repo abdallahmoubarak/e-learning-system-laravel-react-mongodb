@@ -3,8 +3,16 @@ import Input from "./Input";
 import { useState } from "react";
 import Button from "./Button";
 
-export default function AddEdit() {
+export default function AddEdit({
+  instructors,
+  setOpenModal,
+  handleAddInstructorClick,
+}) {
   const [selected, setSelected] = useState();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+
   return (
     <>
       <div className="add-edit-container">
@@ -15,14 +23,25 @@ export default function AddEdit() {
           setSelected={setSelected}
           selected={selected}
         />
-        <Input name={"Name"} />
+        <Input name={"Name"} value={name} setValue={setName} />
         {selected !== "Course" && (
           <>
-            <Input name={"Email"} />
-            <Input name={"Phone"} />
+            <Input name={"Email"} value={email} setValue={setEmail} />
+            <Input name={"Phone"} value={phone} setValue={setPhone} />
           </>
         )}
-        <Button text="Add" dark={true} />
+        {selected === "Course" && (
+          <Select name="Instructor" options={instructors} />
+        )}
+        <Button
+          text="Add"
+          dark={true}
+          onClick={() => {
+            selected === "Instructor" &&
+              handleAddInstructorClick({ name, email, phone });
+            setOpenModal(false);
+          }}
+        />
       </div>
       <style jsx="true">{`
         .add-edit-container {

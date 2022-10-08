@@ -4,10 +4,14 @@ import Select from "../Select";
 import Button from "../Button";
 import Table from "../Table";
 import Modal from "../Modal";
-import { useInstructorsData } from "../../hooks/useInstructorsData";
+import {
+  useAddInstructor,
+  useInstructorsData,
+} from "../../hooks/useInstructorsData";
 import { useStudentsData } from "../../hooks/useStudentsData";
 import { useCoursesData } from "../../hooks/useCoursesData";
 import filter from "../../util/search";
+import { v4 as uuid } from "uuid";
 let rows = [];
 
 export default function Admin() {
@@ -17,6 +21,15 @@ export default function Admin() {
   const { data: instructors } = useInstructorsData();
   const { data: students } = useStudentsData();
   const { data: courses } = useCoursesData();
+
+  const { mutate: addInstructor } = useAddInstructor();
+
+  const handleAddInstructorClick = ({ name, email, phone }) => {
+    const id = uuid();
+    const code = "122109";
+    const instructor = { id, code, name, email, phone };
+    addInstructor(instructor);
+  };
 
   if (selected === "" && students && instructors) {
     rows = instructors?.concat(students);
@@ -51,7 +64,13 @@ export default function Admin() {
         <Modal
           openModal={openModal}
           setOpenModal={setOpenModal}
-          content={<AddEdit />}
+          content={
+            <AddEdit
+              instructors={instructors?.map((i) => i.name)}
+              handleAddInstructorClick={handleAddInstructorClick}
+              setOpenModal={setOpenModal}
+            />
+          }
         />
       </div>
       <style jsx="true">{`
