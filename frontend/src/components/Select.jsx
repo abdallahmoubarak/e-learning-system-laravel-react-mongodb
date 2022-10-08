@@ -10,7 +10,8 @@ export default function Select({ name, options, selected, setSelected }) {
           className="input"
           id={id}
           onChange={(e) => setSelected(e.target.value)}
-          value={selected || `Select A ${name}`}>
+          defaultValue={selected}>
+          <option value="">Select {name}</option>
           {options.map((option, i) => (
             <option key={i}>{option}</option>
           ))}
