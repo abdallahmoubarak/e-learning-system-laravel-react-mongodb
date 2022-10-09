@@ -8,6 +8,7 @@ import filter from "../../util/search";
 import Add from "../Add";
 import { useEffect } from "react";
 import { useFetchCourses } from "../../hooks/useCoursesData";
+import { filterSelected } from "../../util/filterSelected";
 let rows = [];
 
 export default function Instructor() {
@@ -28,26 +29,8 @@ export default function Instructor() {
       setHeader(["Course_Name", "Type", "Title", "Content"]);
   }, [selected]);
 
-  if (selected === "Announcements" && courses)
-    rows = courses
-      ?.map((course) =>
-        course.announcements?.map((i) => {
-          return { ...i, course_name: course.name, type: "Announcement" };
-        }),
-      )
-      .filter((i) => i)
-      .flat(1);
-  if (selected === "Assignments" && courses)
-    rows = courses
-      ?.map((course) =>
-        course.assignments?.map((i) => {
-          return { ...i, course_name: course.name, type: "Assignment" };
-        }),
-      )
-      .filter((i) => i)
-      .flat(1);
+  if (courses) rows = filterSelected(selected, courses);
   if (selected === "Students" && students) rows = students;
-  if (selected === "Courses" && courses) rows = courses;
   if (rows[0] && !!search) rows = filter(rows, search, searchFields);
 
   const handleEditClick = (item) => {
@@ -80,6 +63,7 @@ export default function Instructor() {
         rows={rows}
         handleEditClick={handleEditClick}
         handleViewClick={handleViewClick}
+        canEdit={true}
       />
       <Modal openModal={openModal} setOpenModal={setOpenModal}>
         <Add setOpenModal={setOpenModal} options={addOptions} />
@@ -90,4 +74,4 @@ export default function Instructor() {
 
 const addOptions = ["Student", "Assignment", "Announcement"];
 const selectOptions = ["Courses", "Students", "Assignments", "Announcements"];
-const searchFields = ["Code", "Name", "Content", "Title"];
+const searchFields = ["Code", "Course_Name", "Name", "Content", "Title"];
