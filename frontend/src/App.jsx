@@ -4,7 +4,7 @@ import Admin from "./components/pages/Admin";
 import SignPage from "./components/pages/SignPage";
 
 function App() {
-  const [auth, setAuth] = useState(false);
+  const [auth, setAuth] = useState(true);
   return (
     <>
       <SignPage auth={auth} setAuth={setAuth} />

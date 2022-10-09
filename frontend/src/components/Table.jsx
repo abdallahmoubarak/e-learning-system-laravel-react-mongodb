@@ -1,5 +1,10 @@
-import { FaRegEdit } from "react-icons/fa";
-export default function Table({ header, rows }) {
+import { FaEye, FaRegEdit } from "react-icons/fa";
+export default function Table({
+  header,
+  rows,
+  handleEditClick,
+  handleViewClick,
+}) {
   return (
     <>
       <div className="table-container">
@@ -11,7 +16,8 @@ export default function Table({ header, rows }) {
                   {item}
                 </th>
               ))}
-              <th className="head">View</th>
+              <th className="head s">Edit</th>
+              <th className="head s">View</th>
             </tr>
           </thead>
           <tbody>
@@ -25,8 +31,11 @@ export default function Table({ header, rows }) {
                     </span>
                   </td>
                 ))}
-                <td className="column">
+                <td className="column" onClick={() => handleEditClick(item)}>
                   <FaRegEdit />
+                </td>
+                <td className="column" onClick={() => handleViewClick(item)}>
+                  <FaEye />
                 </td>
               </tr>
             ))}
@@ -107,6 +116,9 @@ export default function Table({ header, rows }) {
         }
         .td-title {
           display: none;
+        }
+        .s {
+          font-size: 0.8rem !important;
         }
 
         @media screen and (max-width: 700px) {
