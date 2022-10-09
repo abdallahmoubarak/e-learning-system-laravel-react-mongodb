@@ -4,6 +4,7 @@ export default function Table({
   rows,
   handleEditClick,
   handleViewClick,
+  canEdit,
 }) {
   return (
     <>
@@ -16,7 +17,7 @@ export default function Table({
                   {item}
                 </th>
               ))}
-              <th className="head s">Edit</th>
+              {canEdit && <th className="head s">Edit</th>}
               <th className="head s">View</th>
             </tr>
           </thead>
@@ -31,9 +32,11 @@ export default function Table({
                     </span>
                   </td>
                 ))}
-                <td className="column" onClick={() => handleEditClick(item)}>
-                  <FaRegEdit />
-                </td>
+                {canEdit && (
+                  <td className="column" onClick={() => handleEditClick(item)}>
+                    <FaRegEdit />
+                  </td>
+                )}
                 <td className="column" onClick={() => handleViewClick(item)}>
                   <FaEye />
                 </td>
