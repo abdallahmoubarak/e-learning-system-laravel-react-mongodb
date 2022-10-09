@@ -55,8 +55,6 @@ h1 {
 .app-body {
   padding: 2rem;
   opacity: 0;
-}
-.appear {
   animation: 1s fadeIn 1s forwards;
   -webkit-animation: 1s fadeIn 1s forwards;
 }
@@ -176,4 +174,48 @@ label {
 .input:focus + .txt-right {
   text-align: right;
   width: 100%;
+}
+
+/* **************** sign ***************** */
+
+h1 {
+  width: 100%;
+  font-size: 2.4rem;
+}
+.sign-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: 26rem;
+  margin: auto;
+  padding: 0 1rem;
+  padding-top: 3rem;
+  color: white;
+}
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  width: 100%;
+  padding: 2rem 0;
+  padding-bottom: 3rem;
+}
+.switch {
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0.2rem;
+}
+
+/* **************logout***************** */
+
+.logout {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  color: white;
+  cursor: pointer;
 }

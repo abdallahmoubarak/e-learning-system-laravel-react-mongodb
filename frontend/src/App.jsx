@@ -1,20 +1,15 @@
-import { useState } from "react";
-import Logo from "./components/Logo";
-import Admin from "./components/pages/Admin";
-import Sign from "./components/pages/Sign";
 import "./app.css";
+import { useState } from "react";
+import Admin from "./components/pages/Admin";
+import SignPage from "./components/pages/SignPage";
 
 function App() {
   const [auth, setAuth] = useState(false);
-
   return (
     <>
-      <div className={`sign ${auth && "sign-done"}`}>
-        <Sign auth={auth} setAuth={setAuth} />
-        <Logo />
-      </div>
+      <SignPage auth={auth} setAuth={setAuth} />
       {auth && (
-        <div className={`app-body appear`}>
+        <div className={`app-body`}>
           <Admin />
         </div>
       )}
