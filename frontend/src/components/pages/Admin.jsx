@@ -26,60 +26,37 @@ export default function Admin() {
   if (rows[0] && !!search) rows = filter(rows, search, searchFields);
 
   return (
-    <>
-      <div className="admin-container">
-        <div className="search-container">
-          <input
-            className="search"
-            placeholder="Search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-          <Button text={"Add"} onClick={() => setOpenModal(true)} />
-          <Select
-            name={"Type"}
-            options={selectOptions}
-            selected={selected}
-            setSelected={setSelected}
-          />
-        </div>
-        <Table
-          header={selected === "Courses" ? courseHeader : header}
-          rows={rows}
+    <div className="admin-container">
+      <div className="search-container">
+        <input
+          className="search"
+          placeholder="Search"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
-        <Modal
-          openModal={openModal}
-          setOpenModal={setOpenModal}
-          content={
-            <AddEdit
-              instructors={instructors?.map((i) => i.name)}
-              setOpenModal={setOpenModal}
-            />
-          }
+        <Button text={"Add"} onClick={() => setOpenModal(true)} />
+        <Select
+          name={"Type"}
+          options={selectOptions}
+          selected={selected}
+          setSelected={setSelected}
         />
       </div>
-      <style jsx="true">{`
-        .admin-container {
-          display: flex;
-          flex-direction: column;
-          gap: 2rem;
+      <Table
+        header={selected === "Courses" ? courseHeader : header}
+        rows={rows}
+      />
+      <Modal
+        openModal={openModal}
+        setOpenModal={setOpenModal}
+        content={
+          <AddEdit
+            instructors={instructors?.map((i) => i.name)}
+            setOpenModal={setOpenModal}
+          />
         }
-        .search-container {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-          gap: 1rem;
-        }
-        .search {
-          padding: 0.6rem 3rem;
-          border-radius: 0.4rem;
-          font-size: 1.2rem;
-          border: 1px solid gray;
-          min-width: 40vw;
-          flex: 1 1;
-        }
-      `}</style>
-    </>
+      />
+    </div>
   );
 }
 

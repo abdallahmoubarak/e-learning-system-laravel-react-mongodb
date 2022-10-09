@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useSignIn, useSignUp } from "../hooks/useSign";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
@@ -6,12 +7,20 @@ import Select from "./Select";
 export default function Sign({ auth, setAuth }) {
   const [signup, setSignUp] = useState(true);
   const [selected, setSelected] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [pass, setPass] = useState("");
+  const [phone, setPhone] = useState("");
+  const { mutate: signUp } = useSignUp();
+  const { mutate: signIn } = useSignIn();
 
-  const handleSignClick = (signType, setAuth) => {
+  const handleSignClick = (signType) => {
     if (signType === "signin") {
+      signIn({ email, pass });
       setAuth(true);
     } else {
-      alert("noooo");
+      signUp({ type: selected, name, email, pass, phone });
+      setAuth(true);
     }
   };
 
@@ -21,9 +30,15 @@ export default function Sign({ auth, setAuth }) {
         <div className="sign-container">
           <h1>{signup ? "Sign Up" : "Sign In"}</h1>
           <div className="inputs-container">
-            {signup && <Input name="Name" />}
-            <Input name="Email" />
-            <Input name="Password" pass={true} />
+            {signup && <Input name="Name" value={name} setValue={setName} />}
+            <Input name="Email" value={email} setValue={setEmail} />
+            <Input
+              name="Password"
+              pass={true}
+              value={pass}
+              setValue={setPass}
+            />
+            <Input name="Phone" value={phone} setValue={setPhone} />
             {signup && (
               <Select
                 name="Type"
@@ -38,9 +53,7 @@ export default function Sign({ auth, setAuth }) {
           </div>
           <Button
             text={signup ? "Sign Up" : "Sign In"}
-            onClick={() =>
-              handleSignClick(signup ? "signup" : "signin", setAuth)
-            }
+            onClick={() => handleSignClick(signup ? "signup" : "signin")}
           />
         </div>
       )}
