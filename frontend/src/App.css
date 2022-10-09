@@ -199,15 +199,20 @@ h1 {
   justify-content: center;
   align-items: center;
   padding: 1rem;
-  gap: 1rem;
+  gap: 0.8rem;
   width: 100%;
-  padding: 2rem 0;
-  padding-bottom: 3rem;
+  padding: 1rem 0;
 }
 .switch {
   cursor: pointer;
   text-decoration: underline;
   padding: 0.2rem;
+}
+.invalid-msg {
+  font-size: 0.8rem;
+  text-align: left;
+  min-height: 1rem;
+  width: 100%;
 }
 
 /*************** logout ******************/

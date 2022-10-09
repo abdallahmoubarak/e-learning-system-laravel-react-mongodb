@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSignIn, useSignUp } from "../hooks/useSign";
+import { validSign } from "../util/signValidation";
 import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
@@ -9,19 +10,20 @@ export default function Sign({ auth, setAuth }) {
   const [selected, setSelected] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [phone, setPhone] = useState("");
-  const { mutate: signUp } = useSignUp();
-  const { mutate: signIn } = useSignIn();
+  const [password, setPass] = useState("");
+  const [msg, setMsg] = useState("");
+  const { mutate: signUp } = useSignUp(setAuth);
+  const { mutate: signIn } = useSignIn(setAuth, setMsg);
 
   const handleSignClick = (signType) => {
-    if (signType === "signin") {
-      signIn({ email, pass });
-      setAuth(true);
-    } else {
-      signUp({ type: selected, name, email, pass, phone });
-      setAuth(true);
-    }
+    setMsg("");
+    let type = selected;
+    if (!validSign(signType, email, password, name, type))
+      return setMsg("Not valid inputs");
+
+    signType === "signin"
+      ? signIn({ email, password })
+      : signUp({ type, name, email, password });
   };
 
   return (
@@ -35,22 +37,29 @@ export default function Sign({ auth, setAuth }) {
             <Input
               name="Password"
               pass={true}
-              value={pass}
+              value={password}
               setValue={setPass}
             />
-            <Input name="Phone" value={phone} setValue={setPhone} />
             {signup && (
               <Select
                 name="Type"
-                options={["Student", "Instructor", "Admin"]}
+                options={options}
                 setSelected={setSelected}
                 selected={selected}
               />
             )}
+            <div className="invalid-msg">{msg}</div>
           </div>
-          <div className="switch" onClick={() => setSignUp(!signup)}>
+
+          <div
+            className="switch"
+            onClick={() => {
+              setMsg("");
+              setSignUp(!signup);
+            }}>
             {signup ? "I already have an account" : "I don't have an account"}
           </div>
+
           <Button
             text={signup ? "Sign Up" : "Sign In"}
             onClick={() => handleSignClick(signup ? "signup" : "signin")}
@@ -60,3 +69,4 @@ export default function Sign({ auth, setAuth }) {
     </>
   );
 }
+const options = ["Student", "Instructor", "Admin"];
