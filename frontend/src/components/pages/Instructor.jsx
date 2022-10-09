@@ -1,12 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Select from "../Select";
 import Button from "../Button";
 import Table from "../Table";
 import Modal from "../Modal";
-import { useFetchUsers } from "../../hooks/useUserData";
-import filter from "../../util/search";
 import Add from "../Add";
-import { useEffect } from "react";
+import filter from "../../util/search";
+import { useFetchUsers } from "../../hooks/useUserData";
 import { useFetchCourses } from "../../hooks/useCoursesData";
 import { filterSelected } from "../../util/filterSelected";
 let rows = [];

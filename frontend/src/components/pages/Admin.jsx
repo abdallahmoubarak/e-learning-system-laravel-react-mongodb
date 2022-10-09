@@ -3,10 +3,10 @@ import Select from "../Select";
 import Button from "../Button";
 import Table from "../Table";
 import Modal from "../Modal";
+import Add from "../Add";
+import filter from "../../util/search";
 import { useFetchUsers } from "../../hooks/useUserData";
 import { useFetchCourses } from "../../hooks/useCoursesData";
-import filter from "../../util/search";
-import Add from "../Add";
 let rows = [];
 
 export default function Admin() {

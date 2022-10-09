@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import Select from "../Select";
 import Table from "../Table";
-import { useFetchCourses } from "../../hooks/useCoursesData";
 import filter from "../../util/search";
+import { useFetchCourses } from "../../hooks/useCoursesData";
 import { filterSelected } from "../../util/filterSelected";
 let rows = [];
 

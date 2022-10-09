@@ -12,9 +12,9 @@ function App() {
       <SignPage auth={auth} setAuth={setAuth} />
       {auth && (
         <div className={`app-body`}>
-          {/* <Admin /> */}
+          <Admin />
           {/* <Instructor /> */}
-          <Student />
+          {/* <Student /> */}
         </div>
       )}
     </>
