@@ -36,7 +36,7 @@ export default function Sign({ auth, setAuth }) {
             <Input name="Email" value={email} setValue={setEmail} />
             <Input
               name="Password"
-              pass={true}
+              type={"password"}
               value={password}
               setValue={setPass}
             />
