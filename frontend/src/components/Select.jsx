@@ -1,6 +1,12 @@
 import { useId } from "react";
 
-export default function Select({ name, options, selected, setSelected }) {
+export default function Select({
+  name,
+  options,
+  selected,
+  setSelected,
+  noDefault,
+}) {
   const id = useId();
 
   return (
@@ -11,9 +17,11 @@ export default function Select({ name, options, selected, setSelected }) {
           id={id}
           onChange={(e) => setSelected(e.target.value)}
           defaultValue={selected}>
-          <option value="">Select {name}</option>
+          {!noDefault && <option value="">Select {name}</option>}
           {options.map((option, i) => (
-            <option key={i}>{option}</option>
+            <option key={i} value={option}>
+              {option}
+            </option>
           ))}
         </select>
         <label htmlFor={id}>{name}</label>
