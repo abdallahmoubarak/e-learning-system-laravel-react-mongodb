@@ -11,25 +11,19 @@ let rows = [];
 
 export default function Admin() {
   const [openModal, setOpenModal] = useState(false);
-  const [selected, setSelected] = useState("");
+  const [selected, setSelected] = useState("Students");
   const [search, setSearch] = useState("");
-  const [defaultValues, setDefaultValues] = useState();
   const { data: instructors } = useFetchUsers("Instructor");
   const { data: students } = useFetchUsers("Student");
   const { data: courses } = useFetchCourses();
 
-  if (selected === "" && students && instructors) {
-    rows = instructors?.concat(students);
-  }
   if (selected === "Instructors" && instructors) rows = instructors;
   if (selected === "Students" && students) rows = students;
   if (selected === "Courses" && courses) rows = courses;
   if (rows[0] && !!search) rows = filter(rows, search, searchFields);
 
-  const handleEditClick = (user) => {
-    setDefaultValues("");
+  const handleEditClick = (item) => {
     setOpenModal(true);
-    setDefaultValues(user);
   };
   const handleViewClick = (user) => {
     console.log(user);
@@ -50,6 +44,7 @@ export default function Admin() {
           options={selectOptions}
           selected={selected}
           setSelected={setSelected}
+          noDefault={true}
         />
       </div>
       <Table
@@ -58,11 +53,13 @@ export default function Admin() {
         handleEditClick={handleEditClick}
         handleViewClick={handleViewClick}
       />
-      <Modal
-        openModal={openModal}
-        setOpenModal={setOpenModal}
-        content={<Add instructors={instructors} setOpenModal={setOpenModal} />}
-      />
+      <Modal openModal={openModal} setOpenModal={setOpenModal}>
+        <Add
+          instructors={instructors}
+          setOpenModal={setOpenModal}
+          options={addOptions}
+        />
+      </Modal>
     </div>
   );
 }
@@ -71,3 +68,4 @@ const header = ["Type", "Code", "Name", "Email", "Phone"];
 const courseHeader = ["Type", "Code", "Name", "Instructor", "Status"];
 const selectOptions = ["Students", "Instructors", "Courses"];
 const searchFields = ["Code", "Name", "Instructor", "Status"];
+const addOptions = ["Student", "Instructor", "Course"];
