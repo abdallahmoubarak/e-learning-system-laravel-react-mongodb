@@ -1,6 +1,6 @@
 import React, { useId } from "react";
 
-export default function Input({ name, value, setValue, pass }) {
+export default function Input({ name, value, setValue, type }) {
   const id = useId();
   return (
     <>
@@ -11,7 +11,7 @@ export default function Input({ name, value, setValue, pass }) {
           id={id}
           placeholder={name}
           value={value}
-          type={pass ? "password" : "text"}
+          type={type || "text"}
           onChange={(e) => setValue(e.target.value)}
         />
         <label htmlFor={id}>{name}</label>
