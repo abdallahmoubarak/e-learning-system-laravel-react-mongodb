@@ -1,11 +1,11 @@
-export default function Modal({ openModal, setOpenModal, content }) {
+export default function Modal({ openModal, setOpenModal, children }) {
   return (
     <>
       <div className={`modal ${openModal && "show"}`}>
         <div className="X" onClick={() => setOpenModal(false)}>
           x
         </div>
-        {content}
+        {children}
       </div>
       <style jsx="true">{`
         .modal {
