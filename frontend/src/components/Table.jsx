@@ -11,7 +11,7 @@ export default function Table({ header, rows }) {
                   {item}
                 </th>
               ))}
-              <th className="head">Edit</th>
+              <th className="head">View</th>
             </tr>
           </thead>
           <tbody>

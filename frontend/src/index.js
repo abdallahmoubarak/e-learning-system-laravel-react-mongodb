@@ -11,7 +11,7 @@ const client = new QueryClient({
     queries: {
       queryFn: async ({ queryKey: [url] }) => {
         if (typeof url === "string") {
-          const { data } = await axios.get(`${BASE_URL}/${url.toLowerCase()}`);
+          const { data } = await axios.get(`${BASE_URL}/${url}`);
           return data;
         }
         throw new Error("Invalid QueryKey");

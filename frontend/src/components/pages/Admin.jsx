@@ -4,48 +4,18 @@ import Select from "../Select";
 import Button from "../Button";
 import Table from "../Table";
 import Modal from "../Modal";
-import {
-  useAddInstructor,
-  useInstructorsData,
-} from "../../hooks/useInstructorsData";
-import { useAddStudent, useStudentsData } from "../../hooks/useStudentsData";
-import { useAddCourse, useCoursesData } from "../../hooks/useCoursesData";
+import { useFetchUsers } from "../../hooks/useUserData";
+import { useCoursesData } from "../../hooks/useCoursesData";
 import filter from "../../util/search";
-import { v4 as uuid } from "uuid";
 let rows = [];
 
 export default function Admin() {
   const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = useState("");
   const [search, setSearch] = useState("");
-  const { data: instructors } = useInstructorsData();
-  const { data: students } = useStudentsData();
+  const { data: instructors } = useFetchUsers("Instructor");
+  const { data: students } = useFetchUsers("Student");
   const { data: courses } = useCoursesData();
-
-  const { mutate: addInstructor } = useAddInstructor();
-  const { mutate: addStudent } = useAddStudent();
-  const { mutate: addCourse } = useAddCourse();
-
-  const handleAddInstructorClick = ({ name, email, phone }) => {
-    const id = uuid();
-    const code = "122109";
-    const instructor = { id, code, name, email, phone };
-    addInstructor(instructor);
-  };
-
-  const handleAddStudentClick = ({ name, email, phone }) => {
-    const id = uuid();
-    const code = "122109";
-    const student = { id, code, name, email, phone };
-    addStudent(student);
-  };
-
-  const handleAddCourseClick = ({ name, instructor }) => {
-    const id = uuid();
-    const code = "122109";
-    const course = { id, code, name, instructor };
-    addCourse(course);
-  };
 
   if (selected === "" && students && instructors) {
     rows = instructors?.concat(students);
@@ -83,9 +53,6 @@ export default function Admin() {
           content={
             <AddEdit
               instructors={instructors?.map((i) => i.name)}
-              handleAddInstructorClick={handleAddInstructorClick}
-              handleAddStudentClick={handleAddStudentClick}
-              handleAddCourseClick={handleAddCourseClick}
               setOpenModal={setOpenModal}
             />
           }
@@ -117,6 +84,6 @@ export default function Admin() {
 }
 
 const header = ["Type", "Code", "Name", "Email", "Phone"];
-const courseHeader = ["Type", "Code", "Name", "Status"];
+const courseHeader = ["Type", "Code", "Name", "Instructor", "Status"];
 const selectOptions = ["Students", "Instructors", "Courses"];
-const searchFields = ["Code", "Name", "Phone", "Status"];
+const searchFields = ["Code", "Name", "Phone", "Instructor", "Status"];

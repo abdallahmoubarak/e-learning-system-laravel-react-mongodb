@@ -2,19 +2,36 @@ import Select from "./Select";
 import Input from "./Input";
 import { useState } from "react";
 import Button from "./Button";
+import { useAddUser } from "../hooks/useUserData";
+import { useAddCourse } from "../hooks/useCoursesData";
+import { v4 as uuid } from "uuid";
 
-export default function AddEdit({
-  instructors,
-  setOpenModal,
-  handleAddInstructorClick,
-  handleAddStudentClick,
-  handleAddCourseClick,
-}) {
+export default function AddEdit({ instructors, setOpenModal }) {
   const [selected, setSelected] = useState();
   const [instructor, setInstructor] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+
+  const { mutate: addStudent } = useAddUser("Student");
+  const { mutate: addInstructor } = useAddUser("Instructor");
+  const { mutate: addCourse } = useAddCourse();
+
+  const handleAddUserClick = ({ type, name, email, phone }) => {
+    const id = uuid();
+    const code = "122109";
+    const user = { id, type, code, name, email, phone };
+    type === "Student" && addStudent(user);
+    type === "Instructor" && addInstructor(user);
+  };
+
+  const handleAddCourseClick = ({ name, instructor }) => {
+    const id = uuid();
+    const code = "CS229101";
+    const status = "active";
+    const course = { id, code, name, instructor, status };
+    addCourse(course);
+  };
 
   return (
     <>
@@ -45,10 +62,9 @@ export default function AddEdit({
           text="Add"
           dark={true}
           onClick={() => {
-            selected === "Instructor" &&
-              handleAddInstructorClick({ name, email, phone });
-            selected === "Student" &&
-              handleAddStudentClick({ name, email, phone });
+            selected === "Instructor" ||
+              ("Student" &&
+                handleAddUserClick({ type: selected, name, email, phone }));
             selected === "Course" && handleAddCourseClick({ name, instructor });
             setName("");
             setEmail("");
