@@ -52,6 +52,7 @@ export default function Admin() {
         rows={rows}
         handleEditClick={handleEditClick}
         handleViewClick={handleViewClick}
+        canEdit={true}
       />
       <Modal openModal={openModal} setOpenModal={setOpenModal}>
         <Add
