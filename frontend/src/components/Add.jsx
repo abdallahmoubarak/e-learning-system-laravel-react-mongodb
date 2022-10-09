@@ -3,41 +3,71 @@ import Input from "./Input";
 import { useState } from "react";
 import Button from "./Button";
 import { useAddUser } from "../hooks/useUserData";
-import { useAddCourse } from "../hooks/useCoursesData";
+import {
+  useAddAnnouncement,
+  useAddAssignment,
+  useAddCourse,
+} from "../hooks/useCoursesData";
 
-export default function Add({ instructors, setOpenModal }) {
-  const [selected, setSelected] = useState("");
+export default function Add({ instructors, setOpenModal, options }) {
+  const [selected, setSelected] = useState("Student");
   const [instructor, setInstructor] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
+  const [content, setContent] = useState("");
+  const [title, setTitle] = useState("");
+  const [due, setDue] = useState("");
   const { mutate: addStudent } = useAddUser("Student");
   const { mutate: addInstructor } = useAddUser("Instructor");
   const { mutate: addCourse } = useAddCourse();
+  const { mutate: addAssignment } = useAddAssignment();
+  const { mutate: addAnnouncement } = useAddAnnouncement();
 
   return (
     <div className="add-edit-container">
-      <div>Add a student, instructor, or course</div>
       <Select
         name={"Type"}
         options={options}
         setSelected={setSelected}
         selected={selected}
+        noDefault={true}
       />
-      <Input name={"Name"} value={name} setValue={setName} />
-      {selected !== "Course" && (
+      {(selected === "Student" ||
+        selected === "Instructor" ||
+        selected === "Course") && (
+        <>
+          <Input name={"Name"} value={name} setValue={setName} />
+        </>
+      )}
+      {(selected === "Student" || selected === "Instructor") && (
         <>
           <Input name={"Email"} value={email} setValue={setEmail} />
           <Input name={"Phone"} value={phone} setValue={setPhone} />
         </>
       )}
-      {selected === "Course" && (
-        <SpecialSelect
-          name="Instructor"
-          options={instructors}
-          selected={instructor}
-          setSelected={setInstructor}
-        />
+      <>
+        {selected === "Course" && (
+          <SpecialSelect
+            name="Instructor"
+            options={instructors}
+            selected={instructor}
+            setSelected={setInstructor}
+          />
+        )}
+      </>
+      {(selected === "Announcement" || selected === "Assignment") && (
+        <>
+          <Input name={"Title"} value={title} setValue={setTitle} />
+          <textarea
+            placeholder="Content"
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
+          />
+        </>
+      )}
+      {selected === "Assignment" && (
+        <Input name={"Due"} value={due} setValue={setDue} type={"date"} />
       )}
       <Button
         text="Add"
@@ -48,7 +78,8 @@ export default function Add({ instructors, setOpenModal }) {
           selected === "Instructor" &&
             addInstructor({ type: selected, name, email, phone });
           selected === "Course" && addCourse({ name, instructor });
-
+          selected === "Assignment" && addAssignment({ title, content, due });
+          selected === "Announcement" && addAnnouncement({ title, content });
           setName("");
           setEmail("");
           setPhone("");
@@ -59,4 +90,3 @@ export default function Add({ instructors, setOpenModal }) {
     </div>
   );
 }
-const options = ["Student", "Instructor", "Course"];
