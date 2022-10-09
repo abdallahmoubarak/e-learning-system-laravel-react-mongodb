@@ -249,7 +249,7 @@ textarea {
   gap: 1rem;
 }
 .search {
-  padding: 0.6rem 3rem;
+  padding: 0.6rem 1rem;
   border-radius: 0.4rem;
   font-size: 1.2rem;
   border: 1px solid gray;
