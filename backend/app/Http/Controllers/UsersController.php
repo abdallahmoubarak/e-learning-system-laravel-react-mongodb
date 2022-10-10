@@ -17,6 +17,15 @@ public function getJWTCustomClaims(){
 }
 
 function getInstructors(){
+    
+    $instructors = User::where('admin_id', Auth::id());
+
+    return response()->json([
+        "status" => "success",
+        "data" => $instructors
+    ]);
+
+    return response()->json(["status" => "Error"]);
 }
 
 function getStudents(){
