@@ -14,7 +14,7 @@ function App() {
     setAuth(!!localStorage.getItem("JWT"));
     !!localStorage.getItem("User") &&
       setCurrentUser(JSON.parse(localStorage.getItem("User")));
-  }, []);
+  }, [auth]);
 
   return (
     <>
