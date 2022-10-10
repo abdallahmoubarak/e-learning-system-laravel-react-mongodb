@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const client = axios.create({ baseURL: "http://localhost:4000" });
+const client = axios.create({ baseURL: "http://127.0.0.1:8000/api/v0.1" });
 
 export const request = ({ ...options }) => {
   client.defaults.headers.common.Authorization = `Bearer token`;

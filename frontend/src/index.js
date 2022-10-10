@@ -4,7 +4,7 @@ import "./index.css";
 import App from "./App";
 import { QueryClient, QueryClientProvider } from "react-query";
 import axios from "axios";
-const BASE_URL = "http://localhost:4000";
+const BASE_URL = "http://127.0.0.1:8000/api/v0.1";
 
 const client = new QueryClient({
   defaultOptions: {

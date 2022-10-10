@@ -1,11 +1,8 @@
 import { useMutation } from "react-query";
 import { request } from "../util/axios-utils";
-import { v4 as uuid } from "uuid";
 
 const signUp = (user) => {
-  const id = uuid();
-  user = { id, ...user };
-  return request({ url: "/users1", data: user, method: "post" });
+  return request({ url: "/sign/signup", data: user, method: "post" });
 };
 
 export const useSignUp = (setAuth, setMsg) => {
@@ -13,7 +10,7 @@ export const useSignUp = (setAuth, setMsg) => {
     onSuccess: (res) => {
       localStorage.setItem("JWT", res.data?.authorisation?.token);
       localStorage.setItem("User", JSON.stringify(res.data?.user));
-      setAuth(true);
+      setAuth(res.data?.authorisation?.token);
     },
     onError: (err) => {
       setMsg(err.message);
@@ -23,16 +20,15 @@ export const useSignUp = (setAuth, setMsg) => {
 };
 
 const signIn = (user) => {
-  return request({ url: "/users", data: user, method: "post" });
+  return request({ url: "/sign/signin", data: user, method: "post" });
 };
 
 export const useSignIn = (setAuth, setMsg) => {
   return useMutation(signIn, {
     onSuccess: (res) => {
-      console.log(res);
       localStorage.setItem("JWT", res.data?.authorisation?.token);
       localStorage.setItem("User", JSON.stringify(res.data?.user));
-      setAuth(true);
+      setAuth(res.data?.authorisation?.token);
     },
     onError: () => {
       setMsg("Your Email/Password dosn't match");
