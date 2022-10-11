@@ -18,7 +18,8 @@ public function getJWTCustomClaims(){
 
 function getInstructors(){
     
-    $instructors = User::where('admin_id', Auth::id())->get();
+    $instructors = User::where('admin_id', Auth::id())
+                    ->where('type','Instructor')->get();
 
     return response()->json([
         "status" => "success",
@@ -31,7 +32,8 @@ function getInstructors(){
 
 function getStudents(){
 
-    $students = User::where('admin_id', Auth::id())->get();
+    $students = User::where('admin_id', Auth::id())
+                    ->where('type','Student')->get();
 
     return response()->json([
         "status" => "success",
