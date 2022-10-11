@@ -1,4 +1,6 @@
-# E Learning System
+# E-Learning System
+
+⭐ Implement an e-learning system using Laravel, React and MongoDB:
 
 ##### Stack:
 
@@ -9,7 +11,6 @@
 <img src='./src/mongodb.svg' height='55' alt=''>
 </p>
 
-⭐ Implement an e-learning system using Laravel, React and MongoDB:
 
 ---
 
