@@ -1,16 +1,17 @@
-export default function Logout({ auth, setAuth }) {
-  const logOut = (setAuth) => {
+export default function Logout({ currentUser }) {
+  const logOut = () => {
     localStorage.removeItem("JWT");
-    localStorage.removeItem("User");
-    setAuth(false);
   };
 
   return (
     <>
-      {auth && (
-        <div className="logout" onClick={() => logOut(setAuth)}>
-          Log out
-        </div>
+      {currentUser && (
+        <>
+          <div className="greating">Hello, {currentUser.name}</div>
+          <div className="logout" onClick={() => logOut()}>
+            Log out
+          </div>
+        </>
       )}
     </>
   );
