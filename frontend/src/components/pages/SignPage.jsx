@@ -2,13 +2,13 @@ import Logout from "../Logout";
 import Sign from "../Sign";
 import Logo from "../Logo";
 
-export default function SignPage({ auth, setAuth }) {
+export default function SignPage({ currentUser }) {
   return (
     <>
-      <div className={`sign ${auth && "sign-done"}`}>
-        <Sign auth={auth} setAuth={setAuth} />
+      <div className={`sign ${currentUser && "sign-done"}`}>
+        <Sign currentUser={currentUser} />
         <Logo />
-        <Logout auth={auth} setAuth={setAuth} />
+        <Logout currentUser={currentUser} />
       </div>
     </>
   );

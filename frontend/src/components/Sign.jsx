@@ -5,15 +5,15 @@ import Button from "./Button";
 import Input from "./Input";
 import Select from "./Select";
 
-export default function Sign({ auth, setAuth }) {
+export default function Sign({ currentUser }) {
   const [signup, setSignUp] = useState(true);
   const [selected, setSelected] = useState("");
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPass] = useState("");
   const [msg, setMsg] = useState("");
-  const { mutate: signUp } = useSignUp(setAuth);
-  const { mutate: signIn } = useSignIn(setAuth, setMsg);
+  const { mutate: signUp } = useSignUp(setMsg);
+  const { mutate: signIn } = useSignIn(setMsg);
 
   const handleSignClick = (signType) => {
     setMsg("");
@@ -28,7 +28,7 @@ export default function Sign({ auth, setAuth }) {
 
   return (
     <>
-      {!auth && (
+      {!currentUser && (
         <div className="sign-container">
           <h1>{signup ? "Sign Up" : "Sign In"}</h1>
           <div className="inputs-container">
