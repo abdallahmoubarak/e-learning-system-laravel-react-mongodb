@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { request } from "../util/axios-utils";
-import { v4 as uuid } from "uuid";
+import { request } from "../util/axiosInstance";
 
 export const useFetchCourses = () => {
   return useQuery("courses", {
@@ -14,10 +13,6 @@ export const useFetchCourses = () => {
 };
 
 const addCourse = (course) => {
-  const id = uuid();
-  const code = "CS229101";
-  const status = "active";
-  course = { id, code, ...course, status };
   return request({ url: "/courses", data: course, method: "post" });
 };
 
@@ -31,8 +26,6 @@ export const useAddCourse = () => {
 };
 
 const addAssignment = (assignment) => {
-  const id = uuid();
-  assignment = { id, ...assignment };
   return request({
     url: "/courses/assignments",
     data: assignment,
@@ -50,8 +43,6 @@ export const useAddAssignment = () => {
 };
 
 const addAnnouncement = (announcement) => {
-  const id = uuid();
-  announcement = { id, ...announcement };
   return request({
     url: "/courses/announcements",
     data: announcement,

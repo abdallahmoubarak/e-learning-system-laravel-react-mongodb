@@ -1,27 +1,26 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { request } from "../util/axios-utils";
-import { v4 as uuid } from "uuid";
+import { authApi } from "../util/axiosInstance";
 
-const addUser = (user) => {
-  const id = uuid();
-  const code = "122109";
-  user = { id, code, ...user };
-  return request({ url: "/users", data: user, method: "post" });
+const getUser = (type) => {
+  return authApi.get(`users/${type}`).then((res) => res.data);
 };
-
 export const useFetchUsers = (type) => {
-  return useQuery(`users?type=${type}`, {
+  return useQuery(getUser(type), {
     select: (data) => {
       return data;
     },
   });
 };
 
+const addUser = (user) => {
+  return authApi.post({ url: "/users", data: user });
+};
+
 export const useAddUser = (type) => {
   const queryClient = useQueryClient();
   return useMutation(addUser, {
     onSuccess: () => {
-      queryClient.invalidateQueries([`users?type=${type}`]);
+      queryClient.invalidateQueries([`users/${type}`]);
     },
   });
 };

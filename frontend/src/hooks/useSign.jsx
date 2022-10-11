@@ -1,20 +1,18 @@
-import { useMutation } from "react-query";
-import { request } from "../util/axios-utils";
+import { QueryClient, useMutation } from "react-query";
+import { request } from "../util/axiosInstance";
 
 const signUp = (user) => {
   return request({ url: "/sign/signup", data: user, method: "post" });
 };
 
-export const useSignUp = (setAuth, setMsg) => {
+export const useSignUp = (setMsg) => {
   return useMutation(signUp, {
     onSuccess: (res) => {
-      localStorage.setItem("JWT", res.data?.authorisation?.token);
-      localStorage.setItem("User", JSON.stringify(res.data?.user));
-      setAuth(res.data?.authorisation?.token);
+      QueryClient.setQueryData("JWT", res.data?.authorisation?.token);
+      QueryClient.setQueryData("User", res.data?.user);
     },
     onError: (err) => {
       setMsg(err.message);
-      setAuth(false);
     },
   });
 };

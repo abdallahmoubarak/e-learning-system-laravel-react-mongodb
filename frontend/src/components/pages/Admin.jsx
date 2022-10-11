@@ -13,8 +13,8 @@ export default function Admin() {
   const [openModal, setOpenModal] = useState(false);
   const [selected, setSelected] = useState("Students");
   const [search, setSearch] = useState("");
-  const { data: instructors } = useFetchUsers("Instructor");
-  const { data: students } = useFetchUsers("Student");
+  const { data: instructors } = useFetchUsers("instructors");
+  const { data: students } = useFetchUsers("students");
   const { data: courses } = useFetchCourses();
 
   if (selected === "Instructors" && instructors) rows = instructors;
