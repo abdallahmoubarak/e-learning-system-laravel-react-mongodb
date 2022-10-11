@@ -4,11 +4,13 @@ const BASE_URL = "http://127.0.0.1:8000/api/v0.1";
 
 export const authApi = axios.create({
   baseURL: BASE_URL,
+  headers: {
+    "Content-Type": "application/json",
+    Authorization: Boolean(localStorage.getItem("JWT"))
+      ? `Bearer ${localStorage.getItem("JWT")}`
+      : undefined,
+  },
 });
-authApi.defaults.headers["Content-Type"] = "application/json";
-authApi.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem(
-  "JWT",
-)}`;
 
 const api = axios.create({
   baseURL: BASE_URL,
