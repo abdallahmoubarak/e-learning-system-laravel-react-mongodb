@@ -8,7 +8,7 @@ export default function Logout({ currentUser }) {
       {currentUser && (
         <>
           <div className="greating">Hello, {currentUser.name}</div>
-          <div className="logout" onClick={() => logOut()}>
+          <div className="logout" onClick={logOut}>
             Log out
           </div>
         </>

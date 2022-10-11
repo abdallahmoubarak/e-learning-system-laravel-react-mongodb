@@ -65,8 +65,8 @@ export default function Admin() {
   );
 }
 
-const header = ["Type", "Code", "Name", "Email", "Phone"];
-const courseHeader = ["Type", "Code", "Name", "Instructor", "Status"];
+const header = ["Code", "Name", "Email", "Phone"];
+const courseHeader = ["Code", "Name", "Instructor", "Status"];
 const selectOptions = ["Students", "Instructors", "Courses"];
-const searchFields = ["Code", "Name", "Instructor", "Status"];
+const searchFields = ["Code", "Name", "Instructor", "Email", "Phone"];
 const addOptions = ["Student", "Instructor", "Course"];

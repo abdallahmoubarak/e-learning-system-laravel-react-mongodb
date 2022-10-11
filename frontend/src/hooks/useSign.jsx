@@ -11,7 +11,6 @@ export const useSignUp = (setMsg) => {
     onSuccess: (res) => {
       authApi.defaults.headers["Content-Type"] = "application/json";
       authApi.defaults.headers.common.Authorization = `Bearer ${res.data?.authorisation?.token}`;
-      client.setQueryData("JWT", res.data?.authorisation?.token);
       localStorage.setItem("JWT", res.data?.authorisation?.token);
       client.setQueryData("User", res.data?.user);
     },
@@ -30,7 +29,6 @@ export const useSignIn = (setMsg) => {
     onSuccess: (res) => {
       authApi.defaults.headers["Content-Type"] = "application/json";
       authApi.defaults.headers.common.Authorization = `Bearer ${res.data?.authorisation?.token}`;
-      client.setQueryData("JWT", res.data?.authorisation?.token);
       localStorage.setItem("JWT", res.data?.authorisation?.token);
       client.setQueryData("User", res.data?.user);
     },
@@ -49,8 +47,5 @@ export const useCurrentUser = () => {
     queryKey: "User",
     queryFn: () => getUser(),
     refetchOnWindowFocus: false,
-    refetchOnReconnect: false,
-    retry: false,
-    staleTime: Infinity,
   });
 };

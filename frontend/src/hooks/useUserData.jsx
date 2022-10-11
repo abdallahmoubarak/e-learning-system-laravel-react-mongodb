@@ -8,7 +8,9 @@ const getUsers = async (type) => {
 };
 
 export const useFetchUsers = (type) => {
-  return useQuery(type, () => getUsers(type));
+  return useQuery(type, () => getUsers(type), {
+    refetchOnWindowFocus: false,
+  });
 };
 
 const addUser = (user) => {

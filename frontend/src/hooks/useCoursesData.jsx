@@ -9,6 +9,7 @@ export const useFetchCourses = () => {
   return useQuery({
     queryFn: () => getCourses(),
     queryKey: "courses",
+    refetchOnWindowFocus: false,
   });
 };
 
