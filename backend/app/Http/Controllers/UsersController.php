@@ -8,14 +8,6 @@ use App\Models\User;
 
 class UsersController extends Controller{
 
-public function getJWTIdentifier(){
-    return $this->getKey();
-}
-
-public function getJWTCustomClaims(){
-    return [];
-}
-
 function getInstructors(){
     
     $instructors = User::where('admin_id', Auth::id())
@@ -73,9 +65,6 @@ function addUser(Request $request){
         ]);
     }
 
-}
-
-function updateUser(Request $request){
 }
 
 function getUser(){
