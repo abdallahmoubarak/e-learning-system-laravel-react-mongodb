@@ -22,6 +22,8 @@ Route::group(["prefix"=> "v0.1"], function(){
             Route::get("/users/students", 'getStudents');
             Route::post("/users", 'addUser');
             Route::put("/users", 'updateUser');
+            Route::get("/users/current", 'getUser');
+
         });
 
         Route::controller(CoursesController::class)->group(function () {
