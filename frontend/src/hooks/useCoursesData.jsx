@@ -1,19 +1,19 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
-import { request } from "../util/axiosInstance";
+import { authApi, request } from "../util/axiosInstance";
+
+const getCourses = () => {
+  return authApi.get("courses").then((res) => res.data?.data);
+};
 
 export const useFetchCourses = () => {
-  return useQuery("courses", {
-    select: (data) => {
-      const courses = data?.map((course) => {
-        return { ...course, type: "Course" };
-      });
-      return courses;
-    },
+  return useQuery({
+    queryFn: () => getCourses(),
+    queryKey: "courses",
   });
 };
 
 const addCourse = (course) => {
-  return request({ url: "/courses", data: course, method: "post" });
+  return authApi({ url: "/courses", data: course, method: "POST" });
 };
 
 export const useAddCourse = () => {

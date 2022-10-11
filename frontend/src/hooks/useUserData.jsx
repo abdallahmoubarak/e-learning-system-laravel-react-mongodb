@@ -1,26 +1,28 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery } from "react-query";
+import { client } from "..";
 import { authApi } from "../util/axiosInstance";
 
-const getUser = (type) => {
-  return authApi.get(`users/${type}`).then((res) => res.data);
+const getUsers = async (type) => {
+  const res = await authApi.get(`/users/${type}`);
+  return res.data?.data;
 };
+
 export const useFetchUsers = (type) => {
-  return useQuery(getUser(type), {
-    select: (data) => {
-      return data;
-    },
-  });
+  return useQuery(type, () => getUsers(type));
 };
 
 const addUser = (user) => {
-  return authApi.post({ url: "/users", data: user });
+  return authApi({ url: "/users", data: user, method: "POST" }).then(
+    (res) => res.data,
+  );
 };
 
-export const useAddUser = (type) => {
-  const queryClient = useQueryClient();
-  return useMutation(addUser, {
-    onSuccess: () => {
-      queryClient.invalidateQueries([`users/${type}`]);
+export const useAddUser = () => {
+  return useMutation({
+    mutationFn: (user) => addUser(user),
+    onSuccess: (data) => {
+      client.invalidateQueries("instructors");
+      client.invalidateQueries("students");
     },
   });
 };

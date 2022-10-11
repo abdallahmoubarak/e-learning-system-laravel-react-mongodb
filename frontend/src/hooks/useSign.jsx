@@ -1,5 +1,6 @@
-import { QueryClient, useMutation } from "react-query";
-import { request } from "../util/axiosInstance";
+import { useMutation, useQuery } from "react-query";
+import { client } from "..";
+import { authApi, request } from "../util/axiosInstance";
 
 const signUp = (user) => {
   return request({ url: "/sign/signup", data: user, method: "post" });
@@ -8,8 +9,11 @@ const signUp = (user) => {
 export const useSignUp = (setMsg) => {
   return useMutation(signUp, {
     onSuccess: (res) => {
-      QueryClient.setQueryData("JWT", res.data?.authorisation?.token);
-      QueryClient.setQueryData("User", res.data?.user);
+      authApi.defaults.headers["Content-Type"] = "application/json";
+      authApi.defaults.headers.common.Authorization = `Bearer ${res.data?.authorisation?.token}`;
+      client.setQueryData("JWT", res.data?.authorisation?.token);
+      localStorage.setItem("JWT", res.data?.authorisation?.token);
+      client.setQueryData("User", res.data?.user);
     },
     onError: (err) => {
       setMsg(err.message);
@@ -21,16 +25,32 @@ const signIn = (user) => {
   return request({ url: "/sign/signin", data: user, method: "post" });
 };
 
-export const useSignIn = (setAuth, setMsg) => {
+export const useSignIn = (setMsg) => {
   return useMutation(signIn, {
     onSuccess: (res) => {
+      authApi.defaults.headers["Content-Type"] = "application/json";
+      authApi.defaults.headers.common.Authorization = `Bearer ${res.data?.authorisation?.token}`;
+      client.setQueryData("JWT", res.data?.authorisation?.token);
       localStorage.setItem("JWT", res.data?.authorisation?.token);
-      localStorage.setItem("User", JSON.stringify(res.data?.user));
-      setAuth(res.data?.authorisation?.token);
+      client.setQueryData("User", res.data?.user);
     },
     onError: () => {
       setMsg("Your Email/Password dosn't match");
-      setAuth(false);
     },
+  });
+};
+
+const getUser = () => {
+  return authApi.get("/users/current").then((res) => res.data?.data);
+};
+
+export const useCurrentUser = () => {
+  return useQuery({
+    queryKey: "User",
+    queryFn: () => getUser(),
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
+    retry: false,
+    staleTime: Infinity,
   });
 };
