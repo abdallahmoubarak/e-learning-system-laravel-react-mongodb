@@ -26,14 +26,24 @@ function getInstructors(){
     ]);
 
     return response()->json(["status" => "Error"]);
+
 }
 
 function getStudents(){
+
+    $students = User::where('admin_id', Auth::id())->get();
+
+    return response()->json([
+        "status" => "success",
+        "data" => $students
+    ]);
+
+    return response()->json(["status" => "Error"]);
+
 }
 
 function addUser(Request $request){
 
-    
     $user = User::where('email', $request->email)->first();
     
     if($user){
