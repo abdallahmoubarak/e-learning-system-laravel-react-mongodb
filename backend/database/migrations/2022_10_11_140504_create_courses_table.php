@@ -15,14 +15,14 @@ return new class extends Migration
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
-            $table->string(code);
-            $table->string(name);
-            $table->string(admin_id);
-            $table->string(instructor_id);
-            $table->string(instructor);
-            $table->array(assignments);
-            $table->array(students);
-            $table->array(announcements);
+            $table->string('code');
+            $table->string('name');
+            $table->string('admin_id');
+            $table->string('instructor_id');
+            $table->string('instructor');
+            $table->array('assignments');
+            $table->array('students');
+            $table->array('announcements');
             $table->timestamps();
         });
     }
