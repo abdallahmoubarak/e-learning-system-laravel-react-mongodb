@@ -52,6 +52,15 @@ h1 {
 }
 
 /****************** App body ********************/
+.fill-back {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: var(--primary-color);
+  width: 100vw;
+  height: 100vh;
+}
+
 .app-body {
   padding: 2rem;
   opacity: 0;
@@ -229,10 +238,18 @@ textarea {
 
 .logout {
   position: absolute;
-  top: 2rem;
+  top: 1.8rem;
   right: 2rem;
   color: white;
   cursor: pointer;
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.greating {
+  padding: 1.6rem 1.2rem;
+  font-size: 1.4rem;
+  color: white;
+  font-weight: bold;
 }
 
 /************** Admin *************/
