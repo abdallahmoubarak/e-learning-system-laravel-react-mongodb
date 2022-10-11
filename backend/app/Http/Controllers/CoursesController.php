@@ -18,6 +18,7 @@ public function getJWTCustomClaims(){
 
 
 function getCourses(){
+    return Course::where('admin_id', Auth::id());
 }
 
 function createCourse(Request $request){

@@ -18,7 +18,7 @@ public function getJWTCustomClaims(){
 
 function getInstructors(){
     
-    $instructors = User::where('admin_id', Auth::id());
+    $instructors = User::where('admin_id', Auth::id())->get();
 
     return response()->json([
         "status" => "success",
@@ -32,6 +32,35 @@ function getStudents(){
 }
 
 function addUser(Request $request){
+
+    
+    $user = User::where('email', $request->email)->first();
+    
+    if($user){
+        $user->admin_id=Auth::id();
+        if($user->save()) {
+            return response()->json([
+                "status" => "success",
+                "data" => $user
+            ]);
+        }
+        return response()->json(["status" => "error"]);
+    }
+    else{
+        $user = User::create([
+            'admin_id' => Auth::id(),
+            'name' => $request->name,
+            'email' => $request->email,
+            'type' => $request->type,
+            'phone' => $request->phone,
+        ]);
+        return response()->json([
+            'status' => 'success',
+            'message' => 'User created successfully',
+            'data' => $user
+        ]);
+    }
+
 }
 
 function updateUser(Request $request){
