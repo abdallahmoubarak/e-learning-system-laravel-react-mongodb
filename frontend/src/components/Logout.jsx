@@ -1,6 +1,11 @@
+import { client } from "..";
+import { authApi } from "../util/axiosInstance";
+
 export default function Logout({ currentUser }) {
   const logOut = () => {
     localStorage.removeItem("JWT");
+    authApi.defaults.headers.Authorization = null;
+    client.setQueryData(["User"], null);
   };
 
   return (

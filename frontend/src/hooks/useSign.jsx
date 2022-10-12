@@ -10,7 +10,7 @@ export const useSignUp = (setMsg) => {
   return useMutation(signUp, {
     onSuccess: (res) => {
       authApi.defaults.headers["Content-Type"] = "application/json";
-      authApi.defaults.headers.common.Authorization = `Bearer ${res.data?.authorisation?.token}`;
+      authApi.defaults.headers.Authorization = `Bearer ${res.data?.authorisation?.token}`;
       localStorage.setItem("JWT", res.data?.authorisation?.token);
       client.setQueryData("User", res.data?.user);
     },
@@ -28,7 +28,7 @@ export const useSignIn = (setMsg) => {
   return useMutation(signIn, {
     onSuccess: (res) => {
       authApi.defaults.headers["Content-Type"] = "application/json";
-      authApi.defaults.headers.common.Authorization = `Bearer ${res.data?.authorisation?.token}`;
+      authApi.defaults.headers.Authorization = `Bearer ${res.data?.authorisation?.token}`;
       localStorage.setItem("JWT", res.data?.authorisation?.token);
       client.setQueryData("User", res.data?.user);
     },
@@ -42,10 +42,11 @@ const getUser = () => {
   return authApi.get("/users/current").then((res) => res.data?.data);
 };
 
-export const useCurrentUser = () => {
+export const useCurrentUser = ({ enabled }) => {
   return useQuery({
     queryKey: "User",
     queryFn: () => getUser(),
     refetchOnWindowFocus: false,
+    enabled,
   });
 };

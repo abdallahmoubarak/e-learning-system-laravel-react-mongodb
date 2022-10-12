@@ -6,7 +6,9 @@ import Student from "./components/pages/Student";
 import { useCurrentUser } from "./hooks/useSign";
 
 function App() {
-  const { data: currentUser, isLoading } = useCurrentUser();
+  const { data: currentUser, isLoading } = useCurrentUser({
+    enabled: Boolean(localStorage.getItem("JWT")),
+  });
 
   return (
     <>
