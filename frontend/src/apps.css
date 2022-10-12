@@ -15,6 +15,7 @@
   scrollbar-width: none;
 }
 
+/* removing scroll bar */
 *::-webkit-scrollbar {
   display: none;
 }

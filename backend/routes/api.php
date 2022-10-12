@@ -14,11 +14,14 @@ Route::group(["prefix"=> "v0.1"], function(){
         Route::post("/sign/signin", 'login');
         Route::post("/sign/signup", 'register');
     });
+
+    Route::group(['middleware'=> 'admin.role'], function(){
+        Route::get("/users/instructors", [UsersController::class,'getInstructors']);
+    });
     
     Route::group(['middleware'=> 'auth:api'], function(){
 
         Route::controller(UsersController::class)->group(function () {
-            Route::get("/users/instructors", 'getInstructors');
             Route::get("/users/students", 'getStudents');
             Route::post("/users", 'addUser');
             Route::put("/users", 'updateUser');

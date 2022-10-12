@@ -69,7 +69,8 @@ function addUser(Request $request){
 
 function getUser(){
 
-    $user = User::find(Auth::id())->first();
+    // $user = User::find(Auth::id())->first();
+    $user = Auth::user();
     
     return response()->json([
         'status' => 'success',
