@@ -11,7 +11,6 @@
 <img src='./src/mongodb.svg' height='55' alt=''>
 </p>
 
-
 ---
 
 #### 🎯 Requirements
@@ -64,7 +63,7 @@ Figma design:
 
 ---
 
-#### Stage 4: Creating main branch, and master bransh for the project
+#### Stage 4: Creating main branch, and master branch for the project
 
 repo link : https://github.com/abdallahmoubarak/e-learning-system-laravel-react-mongodb
 
@@ -73,6 +72,53 @@ repo link : https://github.com/abdallahmoubarak/e-learning-system-laravel-react-
 - Substage 3 : listing APIs
 - Substage 4 : fitting API's in frontend (react-query)
 
-
 ---
 
+#### Stage 5: Presenting the project
+
+<table>
+  <tr>
+    <th><h4>Sign up process</h4></th>
+  </tr>
+  <tr>
+    <td><img src="./src/signup.gif" /></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th><h4>Adding instructor</h4></th>
+  </tr>
+  <tr>
+    <td><img src="./src/adding_instructor.gif" /></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th><h4>Adding course</h4></th>
+  </tr>
+  <tr>
+    <td>
+        <img src='./src/adding_course.gif' >
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th><h4>Logout</h4></th>
+  </tr>
+  <tr>
+    <td><img src="./src/logout.gif" /></td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <th><h4>Sign in</h4></th>
+  </tr>
+  <tr>
+    <td><img src="./src/signin.gif" /></td>
+  </tr>
+</table>
